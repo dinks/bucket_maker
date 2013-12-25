@@ -4,6 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/dinks/bucket_maker.png)](https://codeclimate.com/github/dinks/bucket_maker)
 [![Build Status](https://travis-ci.org/dinks/bucket_maker.png?branch=master)](https://travis-ci.org/dinks/bucket_maker)
 [![Coverage Status](https://coveralls.io/repos/dinks/bucket_maker/badge.png)](https://coveralls.io/r/dinks/bucket_maker)
+[![Dependency Status](https://gemnasium.com/dinks/bucket_maker.png)](https://gemnasium.com/dinks/bucket_maker)
 
 A Gem to categorize Objects into buckets. Typical use case is an A/B test for Users
 
