@@ -21,13 +21,13 @@ Or install it yourself as:
 
     $ gem install bucket_maker
 
-Generate the initializer by running
+Generate the `initializer` by running
 
     rails g bucket_maker:install
 
 This will create a file `config/bucket_maker.rb` with the configuration options
 
-The Series/Bucket/Group is common for all the `Bucketable` objects
+The `Series/Bucket/Group` is common for all the `Bucketable` objects
 
 We define the buckets in a yml file and add this to the configuration file
 Please look at `spec/dummy/config/buckets.yml`
@@ -36,7 +36,7 @@ To create a model (if does not exist) and populate the model with the bucket_mak
 
     rails g bucket_maker MODEL
 
-Where MODEL could be say User
+Where `MODEL` could be say `User`
 
 This will add the code to the *top* of the class
 
