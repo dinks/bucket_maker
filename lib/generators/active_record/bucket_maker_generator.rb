@@ -37,8 +37,11 @@ module ActiveRecord
 
         inject_into_class(model_path, klass_path.last, contents) if model_exists?
 
-        if store_in == 'active_record' && active_recordable_exists?
-          ar_contents = <<-CONTENT.strip_heredoc
+        inject_for_active_recordable if store_in == 'active_record' && active_recordable_exists?
+      end
+
+      def inject_for_active_recordable
+        ar_contents = <<-CONTENT.strip_heredoc
             # Association with the bucket
             belongs_to :bucketable, polymorphic: true
           CONTENT
@@ -46,7 +49,6 @@ module ActiveRecord
           ar_contents = ar_contents.split("\n").map { |line| " " + line } .join("\n") << "\n\n"
 
           inject_into_class(active_recordable_path, ACTIVE_RECORDABLE.camelize, ar_contents)
-        end
       end
 
       def copy_bucket_maker_migration
