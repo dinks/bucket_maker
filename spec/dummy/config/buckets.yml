@@ -1,0 +1,35 @@
+series:
+  test_series_one:
+    description: Some lame description for the Series
+    # created_after: "3rd Jan 2014"
+    buckets:
+      actual_test_one:
+        description: Test One
+        created_after: "1st Jan 2000"
+        distributions:
+          group_one: 0.3
+          group_two: 0.5
+          group_three: 0.2
+      actual_test_two:
+        description: Test Two
+        created_after: "1st Jan 2000"
+        distributions:
+          group_one: 0.7
+          group_two: 0.3
+  test_series_two:
+    description: Some lame description for the Series
+    created_after: "1st Jan 2000"
+    buckets:
+      actual_1test_one:
+        description: Test One
+        created_after: "1st Jan 2000"
+        distributions:
+          group_one: 0.3
+          group_two: 0.5
+          group_three: 0.2
+      actual_1test_two:
+        description: Test Two
+        created_after: "1st Jan 2000"
+        distributions:
+          group_one: 0.7
+          group_two: 0.3
