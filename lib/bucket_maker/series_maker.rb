@@ -1,3 +1,4 @@
+require 'singleton'
 require 'active_support/inflector'
 require 'bucket_maker/series'
 require 'bucket_maker/bucket'
