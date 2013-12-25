@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Dinesh Vasudevan"]
   spec.email         = ["dinesh.vasudevan@gmail.com"]
   spec.description   = %q{ Create Simple A/B categories }
-  spec.summary       = %q{ Create Simple A/B categories }
+  spec.summary       = %q{ A Gem to categorize Objects into buckets. Typical use case is an A/B test for Users }
   spec.homepage      = "https://github.com/dinks/bucket_maker"
   spec.license       = "MIT"
 
