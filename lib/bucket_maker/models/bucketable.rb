@@ -2,7 +2,18 @@ require 'bucket_maker/series_maker'
 
 module BucketMaker
   module Models
+    # Module which holds the base methods for Bucketable objects
+    #
     module Bucketable
+
+      # Used to test if this object has been grouped under a certain group
+      #
+      # @param series_name [String] Name of the Series
+      # @param bucket_name [String] Name of the Bucket
+      # @param group_name [String] Name of the Group
+      # @param force [Boolean] To force the object into the group_name
+      # @return [Boolean] if the given group_name is the same after randomization of groups
+      #
       def in_bucket?(series_name, bucket_name, group_name, force=false)
         # Get the singleton Series Maker
         series_maker = BucketMaker::SeriesMaker.instance
@@ -39,15 +50,32 @@ module BucketMaker
         end
       end
 
+      # Used to test if this object has not been grouped under a certain group
+      #
+      # @param series_name [String] Name of the Series
+      # @param bucket_name [String] Name of the Bucket
+      # @param group_name [String] Name of the Group
+      # @return [Boolean] if the given group_name is the not the same after randomization of groups
+      #
       def not_in_bucket?(series_name, bucket_name, group_name)
         !in_bucket?(series_name, bucket_name, group_name)
       end
 
+      # Force object into the group_name under bucket under series
+      #
+      # @param series_name [String] Name of the Series
+      # @param bucket_name [String] Name of the Bucket
+      # @param group_name [String] Name of the Group
+      # @return [Boolean] Always true because forcing is ok by us
+      #
       def force_to_bucket!(series_name, bucket_name, group_name)
         # Forcefully place inside the bucket
         in_bucket?(series_name, bucket_name, group_name, true)
       end
 
+      # Iteratively group object into buckets
+      #
+      # @return [Boolean] true if all the operations are successfull
       def bucketize!
         # Take each series and bucket
         BucketMaker::SeriesMaker.instance.for_each_series_with_bucketable do |series_maker, series_name, bucket_name|
@@ -61,6 +89,11 @@ module BucketMaker
         end
       end
 
+      # Group object for series_name and bucket_name
+      #
+      # @param series_name [String] Name of the Series
+      # @param bucket_name [String] Name of the Bucket
+      # @return [Boolean] true if the operation is successfull
       def bucketize_for_series_and_bucket!(series_name, bucket_name)
         # Get the singleton Series Maker
         series_maker = BucketMaker::SeriesMaker.instance
@@ -77,10 +110,20 @@ module BucketMaker
         end
       end
 
+      # Get the value from persistent store for a key
+      #
+      # @param series_key [String] Series Key
+      # @return [String] should return the group_name
+      #
       def group_for_key(series_key)
         raise NotImplementedError, "Implement group_for_key"
       end
 
+      # Set the value to a persistent store for a series and group
+      #
+      # @param series_key [String] Series Key
+      # @param group_name [String] Name of the Group
+      #
       def set_group_for_key(series_key, group_name)
         raise NotImplementedError, "Implement set_group_for_key"
       end

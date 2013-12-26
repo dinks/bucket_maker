@@ -1,4 +1,6 @@
 module BucketMaker
+  # Engine for the BucketMaker
+  #
   class Engine < Rails::Engine
     initializer 'Require concerns path' do |app|
       concerns_path = 'app/controllers/concerns'
@@ -7,6 +9,8 @@ module BucketMaker
         app.paths.add(concerns_path)
       end
 
+      # Always add the concern
+      #
       require 'concerns/bucket_maker_concern'
     end
   end

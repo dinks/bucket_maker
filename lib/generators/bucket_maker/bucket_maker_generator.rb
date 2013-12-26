@@ -2,6 +2,8 @@ require 'rails/generators/named_base'
 
 module BucketMaker
   module Generators
+    # Base Generator to set the namespace
+    #
     class BucketMakerGenerator < Rails::Generators::NamedBase
 
       namespace 'bucket_maker'
