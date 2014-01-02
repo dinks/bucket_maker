@@ -114,3 +114,5 @@ into the group `group_name` under `bucket_name` under `series_name`
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+[![Analytics](https://ga-beacon.appspot.com/UA-46793597-1/bucket_maker/readme)](https://github.com/dinks/bucket_maker)
