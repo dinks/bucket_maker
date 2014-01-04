@@ -46,7 +46,7 @@ module BucketMaker
     # Expects a block parameter to be passed
     #
     def for_each_series_with_bucketable
-      @series.collect do |series_name, series|
+      @series.map do |series_name, series|
         series.each_bucket do |bucket_name, bucket|
           yield self, series_name, bucket_name
         end

@@ -68,7 +68,7 @@ module BucketMaker
       randomized = rand(@denominator * 100)
       # Find where the randomized number falls in the calculated range
       #
-      @distributions_percent.find do |_, percent_range|
+      @distributions_percent.detect do |_, percent_range|
         percent_range.include?(randomized)
       end.first
     end
