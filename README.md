@@ -116,3 +116,7 @@ into the group `group_name` under `bucket_name` under `series_name`
 5. Create new Pull Request
 
 [![Analytics](https://ga-beacon.appspot.com/UA-46793597-1/bucket_maker/readme)](https://github.com/dinks/bucket_maker)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dinks/bucket_maker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
