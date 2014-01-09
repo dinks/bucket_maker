@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/dinks/bucket_maker.png?branch=master)](https://travis-ci.org/dinks/bucket_maker)
 [![Coverage Status](https://coveralls.io/repos/dinks/bucket_maker/badge.png)](https://coveralls.io/r/dinks/bucket_maker)
 [![Dependency Status](https://gemnasium.com/dinks/bucket_maker.png)](https://gemnasium.com/dinks/bucket_maker)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dinks/bucket_maker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 A Gem to categorize Objects into buckets. Typical use case is an A/B test for Users
 
@@ -116,7 +117,3 @@ into the group `group_name` under `bucket_name` under `series_name`
 5. Create new Pull Request
 
 [![Analytics](https://ga-beacon.appspot.com/UA-46793597-1/bucket_maker/readme)](https://github.com/dinks/bucket_maker)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dinks/bucket_maker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
