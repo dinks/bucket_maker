@@ -19,7 +19,7 @@ describe BucketMakerController, type: :controller do
       before { get :show, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
       it 'returns failure' do
-        expect(response.status).to eq(401)
+        expect(response.status).to eql(401)
       end
     end
 
@@ -27,7 +27,7 @@ describe BucketMakerController, type: :controller do
       before { post :switch, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
       it 'returns failure' do
-        expect(response.status).to eq(401)
+        expect(response.status).to eql(401)
       end
     end
 
@@ -35,7 +35,7 @@ describe BucketMakerController, type: :controller do
       before { post :randomize, series_name: 'test_series_one', bucket_name: 'actual_test_one'}
 
       it 'returns failure' do
-        expect(response.status).to eq(401)
+        expect(response.status).to eql(401)
       end
     end
   end
@@ -46,7 +46,7 @@ describe BucketMakerController, type: :controller do
         before { get :show, series_name: 'non_existant_series', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
         it 'returns failure' do
-          expect(response.status).to eq(404)
+          expect(response.status).to eql(404)
         end
       end
 
@@ -54,7 +54,7 @@ describe BucketMakerController, type: :controller do
         before { post :switch, series_name: 'non_existant_series', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
         it 'returns failure' do
-          expect(response.status).to eq(404)
+          expect(response.status).to eql(404)
         end
       end
 
@@ -62,7 +62,7 @@ describe BucketMakerController, type: :controller do
         before { post :randomize, series_name: 'non_existant_series', bucket_name: 'actual_test_one'}
 
         it 'returns failure' do
-          expect(response.status).to eq(404)
+          expect(response.status).to eql(404)
         end
       end
     end
@@ -70,17 +70,17 @@ describe BucketMakerController, type: :controller do
     context 'for get group' do
       it 'returns success' do
         get :show, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'
-        expect(response.status).to eq(200)
+        expect(response.status).to eql(200)
       end
 
       context 'for the correct bucket' do
         before do
-          user.stub(:in_bucket?).with('test_series_one', 'actual_test_one', 'group_one') { true }
+          allow(user).to receive(:in_bucket?).and_return(true)
           get :show, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'
         end
 
         it 'has a true response' do
-          response.body.should include('true')
+          expect(response.body).to include('true')
         end
       end
     end
@@ -89,11 +89,11 @@ describe BucketMakerController, type: :controller do
       before { post :switch, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
       it 'returns success' do
-        expect(response.status).to eq(200)
+        expect(response.status).to eql(200)
       end
 
       it 'has a true response' do
-        response.body.should include('true')
+        expect(response.body).to include('true')
       end
     end
 
@@ -101,11 +101,11 @@ describe BucketMakerController, type: :controller do
       before { post :randomize, series_name: 'test_series_one', bucket_name: 'actual_test_one'}
 
       it 'returns success' do
-        expect(response.status).to eq(200)
+        expect(response.status).to eql(200)
       end
 
       it 'has a true response' do
-        response.body.should include('true')
+        expect(response.body).to include('true')
       end
     end
   end

@@ -17,41 +17,59 @@ describe BucketMaker::Bucket do
 
   context 'for configuration' do
     it 'should have the correct distributions' do
-      bucket.distributions[:group_one].should == 0.3
-      bucket.distributions[:group_two].should == 0.5
-      bucket.distributions[:group_three].should == 0.2
+      expect(bucket.distributions[:group_one]).to eql(0.3)
+      expect(bucket.distributions[:group_two]).to eql(0.5)
+      expect(bucket.distributions[:group_three]).to eql(0.2)
     end
 
     context 'and distributions percent' do
       before { bucket.random_group }
 
       it 'should have the correct distribution percentages' do
-        bucket.distributions_percent[:group_one].should == (0..30)
-        bucket.distributions_percent[:group_two].should == (30..80)
-        bucket.distributions_percent[:group_three].should == (80..100)
+        expect(bucket.distributions_percent[:group_one]).to eql(0..30.0)
+        expect(bucket.distributions_percent[:group_two]).to eql(30.0..80.0)
+        expect(bucket.distributions_percent[:group_three]).to eql(80.0..100.0)
       end
     end
   end
 
   context '#is_bucketable?' do
-    it 'should return false if created after doesnt satisfy' do
-      user = build(:user, id: 12345, created_at: DateTime.parse('1st Jan 2010'))
-      bucket.is_bucketable?(user).should be_false
+    subject { bucket.is_bucketable?(user) }
+
+    context 'created after doesnt satisfy' do
+      let(:user) { build(:user, id: 12345, created_at: DateTime.parse('1st Jan 2010')) }
+
+      it 'should return false' do
+        expect(subject).to eql(false)
+      end
     end
 
-    it 'should return true if created after does satisfy' do
-      user = build(:user, id: 12345, created_at: DateTime.parse('3rd Jan 2010'))
-      bucket.is_bucketable?(user).should be_true
+    context 'created after does satisfy' do
+      let(:user) { build(:user, id: 12345, created_at: DateTime.parse('3rd Jan 2010')) }
+
+      it 'should return true' do
+        expect(subject).to eql(true)
+      end
     end
   end
 
   context '#has_group?' do
-    it 'should return false for non existant group' do
-      bucket.has_group?('non_existant_test').should be_false
+    subject { bucket.has_group?(group) }
+
+    context 'for non existant group' do
+      let(:group) { 'non_existant_test' }
+
+      it 'should return false' do
+        expect(subject).to eql(false)
+      end
     end
 
-    it 'should return true for existing group' do
-      bucket.has_group?('group_two').should be_true
+    context 'for existing group' do
+      let(:group) { 'group_two' }
+
+      it 'should return true' do
+        expect(subject).to eql(true)
+      end
     end
   end
 end

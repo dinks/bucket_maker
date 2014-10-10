@@ -48,9 +48,9 @@ module BucketMaker
     #
     def for_each_series_with_bucketable
       @series.map do |series_name, series|
-        series.each_bucket do |bucket_name, bucket|
+        series.map_bucket do |bucket_name, bucket|
           yield self, series_name, bucket_name
-        end
+        end.inject(true) {|result, value| result && value }
       end.inject(true) {|result, value| result && value } if block_given?
     end
 
