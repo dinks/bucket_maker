@@ -25,7 +25,7 @@ module BucketMaker
       absolute_config_path = Rails.root + config
 
       if File.exists?(absolute_config_path)
-        @configuration = YAML.load_file(absolute_config_path)
+        @configuration = ::YAML.load_file(absolute_config_path)
 
         @series = @configuration[BUCKET_ROOT].inject({}) do |result, (series_name, series_options)|
                     result[series_name.to_sym] = BucketMaker::Series.new(series_name, series_options)
