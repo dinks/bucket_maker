@@ -1,4 +1,5 @@
 require 'singleton'
+require 'yaml'
 require 'active_support/inflector'
 require 'bucket_maker/series'
 require 'bucket_maker/bucket'
@@ -25,7 +26,7 @@ module BucketMaker
       absolute_config_path = Rails.root + config
 
       if File.exists?(absolute_config_path)
-        @configuration = YAML.load_file(absolute_config_path)
+        @configuration = ::YAML.load_file(absolute_config_path)
 
         @series = @configuration[BUCKET_ROOT].inject({}) do |result, (series_name, series_options)|
                     result[series_name.to_sym] = BucketMaker::Series.new(series_name, series_options)
@@ -47,9 +48,9 @@ module BucketMaker
     #
     def for_each_series_with_bucketable
       @series.map do |series_name, series|
-        series.each_bucket do |bucket_name, bucket|
+        series.map_bucket do |bucket_name, bucket|
           yield self, series_name, bucket_name
-        end
+        end.inject(true) {|result, value| result && value }
       end.inject(true) {|result, value| result && value } if block_given?
     end
 

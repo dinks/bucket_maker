@@ -32,8 +32,8 @@ module BucketMaker
 
     # Iterator going through each bucket
     #
-    def each_bucket
-      @buckets.each do |bucket_name, bucket|
+    def map_bucket
+      @buckets.map do |bucket_name, bucket|
         yield bucket_name, bucket
       end if block_given?
     end
