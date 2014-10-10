@@ -29,8 +29,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "activerecord", ">= 3.1.0" # For model test
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "appraisal" # Check against different Rails Versions
-  spec.add_development_dependency "capybara", "= 2.0.3"
-  spec.add_development_dependency "pry-debugger"
+  spec.add_development_dependency "capybara" # "= 2.0.3"
+  if RUBY_VERSION > "1.9.3"
+    spec.add_development_dependency "pry-byebug"
+  else
+    spec.add_development_dependency "pry-debugger"
+  end
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "factory_girl_rails"
   spec.add_development_dependency "mock_redis"

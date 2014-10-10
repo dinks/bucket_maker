@@ -1,12 +1,12 @@
 require 'spec_helper'
 require 'json'
 
-describe BucketMakerController do
+describe BucketMakerController, type: :controller do
 
   let(:user) { build(:user) }
 
   before do
-    ApplicationController.any_instance.stub(:set_current_user) { true }
+    allow_any_instance_of(ApplicationController).to receive(:set_current_user).and_return(true)
     controller.instance_variable_set(:@current_user, user)
   end
 
@@ -19,7 +19,7 @@ describe BucketMakerController do
       before { get :show, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
       it 'returns failure' do
-        response.should_not be_success
+        expect(response.status).to eq(401)
       end
     end
 
@@ -27,7 +27,7 @@ describe BucketMakerController do
       before { post :switch, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
       it 'returns failure' do
-        response.should_not be_success
+        expect(response.status).to eq(401)
       end
     end
 
@@ -35,7 +35,7 @@ describe BucketMakerController do
       before { post :randomize, series_name: 'test_series_one', bucket_name: 'actual_test_one'}
 
       it 'returns failure' do
-        response.should_not be_success
+        expect(response.status).to eq(401)
       end
     end
   end
@@ -46,7 +46,7 @@ describe BucketMakerController do
         before { get :show, series_name: 'non_existant_series', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
         it 'returns failure' do
-          response.should_not be_success
+          expect(response.status).to eq(404)
         end
       end
 
@@ -54,7 +54,7 @@ describe BucketMakerController do
         before { post :switch, series_name: 'non_existant_series', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
         it 'returns failure' do
-          response.should_not be_success
+          expect(response.status).to eq(404)
         end
       end
 
@@ -62,7 +62,7 @@ describe BucketMakerController do
         before { post :randomize, series_name: 'non_existant_series', bucket_name: 'actual_test_one'}
 
         it 'returns failure' do
-          response.should_not be_success
+          expect(response.status).to eq(404)
         end
       end
     end
@@ -70,7 +70,7 @@ describe BucketMakerController do
     context 'for get group' do
       it 'returns success' do
         get :show, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'
-        response.should be_success
+        expect(response.status).to eq(200)
       end
 
       context 'for the correct bucket' do
@@ -89,7 +89,7 @@ describe BucketMakerController do
       before { post :switch, series_name: 'test_series_one', bucket_name: 'actual_test_one', group_name: 'group_one'}
 
       it 'returns success' do
-        response.should be_success
+        expect(response.status).to eq(200)
       end
 
       it 'has a true response' do
@@ -101,7 +101,7 @@ describe BucketMakerController do
       before { post :randomize, series_name: 'test_series_one', bucket_name: 'actual_test_one'}
 
       it 'returns success' do
-        response.should be_success
+        expect(response.status).to eq(200)
       end
 
       it 'has a true response' do
